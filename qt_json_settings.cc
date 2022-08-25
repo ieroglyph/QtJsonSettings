@@ -84,8 +84,8 @@ bool WriteJsonSettingsFile(QIODevice &device, const QSettings::SettingsMap &sett
 
   QJsonObject root = doc.object();
 
-  for (QString &key : settings.keys()) {
-    if (!WriteValueToJson(root, key, settings[key])) {
+  for (auto it = settings.cbegin(); it != settings.cend(); it++) {
+    if (!WriteValueToJson(root, it.key(), it.value())) {
       return false;
     }
   }
